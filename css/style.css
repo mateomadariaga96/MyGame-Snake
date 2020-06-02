@@ -1,0 +1,20 @@
+html,
+body {
+  height: 100%;
+}
+
+.game-container {
+	background-image: url("../img/background.png");
+	width: 1000px;
+	height: 100%;
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+canvas {
+	border: 1px double;
+    margin: 150px 50px;
+	display: block;
+}
