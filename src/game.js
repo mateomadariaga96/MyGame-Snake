@@ -7,7 +7,7 @@ class Game {
   
 	  this.bg = new Background(ctx);
 	  this.snake = new Snake(ctx);
-	  //this.obs = [];
+	  this.fd = new Food(ctx);
 	}
 
 	start() {
@@ -36,9 +36,10 @@ class Game {
 		this.snake.move()
 	}
 
-	/*_addFood() {
-		if (this.tick % 100) return
-		this.obs.push(new Food(this.ctx))
-	}*/
+	_addFood() {
+		if (this.tick % 10000) {
+			this.fd.draw()
+		}
+	}
 }
 

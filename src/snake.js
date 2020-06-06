@@ -10,10 +10,7 @@ class Snake {
 			{x:210, y:250}
 		]
 
-		this.x = 10
-		this.y = 0
-
-		this.dx = 0
+		this.dx = 10
 		this.dy = 0
 
 		this._setListeners()
@@ -35,9 +32,19 @@ class Snake {
 	}
 
 	move () {
-		const head = {x: this.snakeArr[0].x + this.x, y: this.snakeArr[0].y};
+		const head = {x: this.snakeArr[0].x + this.dx, y: this.snakeArr[0].y + this.dy};
+	    if (this.snakeArr[0] > this.ctx.width) {
+			this.snakeArr[0].x = 0;
+			this.snakeArr.unshift(head);
+		    this.snakeArr.pop();
+		}
+		if (this.snakeArr[0] > this.ctx.length) {
+			this.snakeArr[0].y = 0;
+			this.snakeArr.unshift(head);
+		    this.snakeArr.pop();
+		}
 		this.snakeArr.unshift(head);
-		this.snakeArr.pop();
+		this.snakeArr.pop();	
 	}
 
 	_setListeners() {
@@ -46,30 +53,32 @@ class Snake {
 			const goingDown = this.dy === 10;  
 			const goingRight = this.dx === 10;  
 			const goingLeft = this.dx === -10;
-			console.log("hola", event.keyCode);
+
             switch(event.keyCode) {
                 case UP:
 					if(!goingDown) {
-						this.dy = -10;
-						this.dx = 0 ;
+					this.dy = -10;
+					this.dx = 0;	
 					}
-					
 					break;
 				case DOWN:
-					if(!goingUp)
+					if(!goingUp) {
 					this.dy = 10;
 					this.dx = 0 ;
+					}
 					break;
 				case LEFT:
-					if(!goingRight)
+					if(!goingRight) {
 					this.dy = 0;
 					this.dx = -10 ;
+					}
 					break;
 				case RIGHT:
-					if(!goingLeft)
+					if(!goingLeft) {
 					this.dy = 0;
 					this.dx = 10;
 					break;
+					}
             }
         })
 	}
