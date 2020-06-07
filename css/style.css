@@ -24,8 +24,9 @@ canvas {
 #score {
 	display: flex;
 	flex-direction: row;
-	font-size: 30px;
+	font-size: 40px;
 	font-family: 'Courier New', Courier, monospace;
+	color: white;
 }
 
 .button-box {

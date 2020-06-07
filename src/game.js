@@ -17,6 +17,8 @@ class Game {
 			this._draw()
 			this._move()
 			this._addFood()
+			this._checkFoodCollisions()
+			this._checkSnakeCollisions()
 			this.tick++
 			if (this.tick >= 10000) {
 				this.tick = 0
@@ -45,5 +47,35 @@ class Game {
             }
         })	
 	}
+
+	_checkFoodCollisions() {
+		const didEatFood = this.snake.snakeArr[0].x === this.fd.x && 
+		this.snake.snakeArr[0].y === this.fd.y;  
+		if (didEatFood) {    
+			this.fd.createFood();
+			this.fd.draw(); 
+			console.log("hola")
+		} else {    
+		this.snake.snakeArr.pop();  
+	    }
+	}
+
+	_checkSnakeCollisions() {
+		for (let i = 4; i < this.snake.snakeArr.length; i++) {
+			const didCollide = this.snake.snakeArr[i].x === this.snake.snakeArr[0].x &&     
+			this.snake.snakeArr[i].y === this.snake.snakeArr[0].y
+			if (didCollide) {
+			this._gameOver()
+			}
+		}
+	}
+
+	_gameOver() {
+		clearInterval(this.intervalId)
+		const gameOver = new Image ();
+	    gameOver.src = "./img/prestart.png"
+		ctx.drawImage (gameOver, 0, 0, 500, 500);
+	}
 }
+
 
