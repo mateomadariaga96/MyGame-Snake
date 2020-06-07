@@ -11,11 +11,12 @@ class Game {
 	}
 
 	start() {
+		this.fd.createFood()
 		this.intervalId =  setInterval(() => {
 			this._clear()
 			this._draw()
 			this._move()
-			//this._addFood()
+			this._addFood()
 			this.tick++
 			if (this.tick >= 10000) {
 				this.tick = 0
@@ -30,6 +31,7 @@ class Game {
 	_draw() {
 		this.bg.draw()
 		this.snake.draw()
+		this.fd.draw()
 	}
 
 	_move() {
@@ -37,9 +39,11 @@ class Game {
 	}
 
 	_addFood() {
-		if (this.tick % 10000) {
-			this.fd.draw()
-		}
+		this.snake.snakeArr.forEach( (part) => {
+			if (this.fd.x === part.x && this.fd.y === part.y) {
+                this.fd.createFood();
+            }
+        })	
 	}
 }
 

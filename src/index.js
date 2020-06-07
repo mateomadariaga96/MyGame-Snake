@@ -9,6 +9,8 @@ window.onload = () => {
 		ctx.drawImage(preStart, 0, 0, 500, 500);
 	}
 
+	document.getElementById("score").style.display = "none";
+
 	//how to play button (creating image)
 	/*const instructions = new Image ();
 	instructions.scr = ""
@@ -19,6 +21,7 @@ window.onload = () => {
 	//start game button
 	document.getElementById('start-button').onclick = () => {
 		startGame();
+		document.getElementById("score").style.display = "flex";
 	};
 	
 	  function startGame() {

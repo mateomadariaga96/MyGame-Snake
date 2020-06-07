@@ -33,15 +33,25 @@ class Snake {
 
 	move () {
 		const head = {x: this.snakeArr[0].x + this.dx, y: this.snakeArr[0].y + this.dy};
-	    if (this.snakeArr[0] > this.ctx.width) {
+	    if (this.snakeArr[0].x > this.ctx.width) {
 			this.snakeArr[0].x = 0;
 			this.snakeArr.unshift(head);
 		    this.snakeArr.pop();
 		}
-		if (this.snakeArr[0] > this.ctx.length) {
+		if (this.snakeArr[0].x < 0) {
+			this.snakeArr[0].x = 500;
+			this.snakeArr.unshift(head);
+		    this.snakeArr.pop();
+		}
+		if (this.snakeArr[0].y > this.ctx.length) {
 			this.snakeArr[0].y = 0;
 			this.snakeArr.unshift(head);
 		    this.snakeArr.pop();
+		}
+		if (this.snakeArr[0].y < 0) {
+			this.snakeArr[0].y = 500;
+			this.snakeArr.unshift(head);
+			this.snakeArr.pop();
 		}
 		this.snakeArr.unshift(head);
 		this.snakeArr.pop();	
