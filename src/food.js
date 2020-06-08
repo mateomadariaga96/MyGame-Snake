@@ -13,8 +13,8 @@ class Food {
 			return Math.round((Math.random() * (max-min) + min) / 20) * 20;
 		}
 
-		this.x = randomTen(0, 500);  
-		this.y = randomTen(0, 500);
+		this.x = randomTen(0, 480);  
+		this.y = randomTen(0, 480);
     }
 
 	draw() {

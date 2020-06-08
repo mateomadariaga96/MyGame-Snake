@@ -18,8 +18,8 @@ class Game {
 			this._clear()
 			this._draw()
 			this._move()
-			this._addFood()
 			this._checkFoodCollisions()
+			this._addFood()
 			this._checkSnakeCollisions()
 			this.tick++
 			if (this.tick >= 10000) {
@@ -46,9 +46,9 @@ class Game {
 			this._clear()
 			this._draw()
 			this._move()
-			//this._addFood()
+			
 			this._checkFoodCollisions()
-			//this._updateScore()
+			this._addFood()
 			this._checkSnakeCollisions()
 			this.tick++
 			if (this.tick >= 10000) {
@@ -74,17 +74,20 @@ class Game {
 	_addFood() {
 		this.snake.snakeArr.forEach( (part) => {
 			if (this.fd.x === part.x && this.fd.y === part.y) {
-				this.fd.createFood()
+				this.fd.createFood();
+				//this._updateScore();
 				//this.fd.draw();
-            }
+            } 
         })	
 	}
 
 	_checkFoodCollisions() {
-		const didEatFood = this.snake._checkIsCollision(this.fd)  
+		//const didEatFood = this.snake._checkIsCollision(this.fd)
+		const didEatFood = this.snake.snakeArr[0].x === this.fd.x &&
+		this.snake.snakeArr[0].y === this.fd.y
 		if (didEatFood) {    
 			this.fd.createFood();
-			this.fd.draw(); 
+			//this.fd.draw(); 
 			this._updateScore();
 		} else {    
 		this.snake.snakeArr.pop();  
@@ -108,7 +111,6 @@ class Game {
 		gameOver.onload = () => {
 			this.ctx.drawImage (gameOver, 0, 0, 500, 500);
 		}
-		//document.getElementById("how-button").style.display = "flex";
 		document.getElementById("start-button").innerHTML = "Restart Game";
 	}
 

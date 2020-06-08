@@ -23,7 +23,6 @@ window.onload = () => {
 	document.getElementById('start-button').onclick = () => {
 		startGame();
 		document.getElementById("score").style.display = "flex";
-		document.getElementById("how-button").style.display = "none";
 		document.getElementById("start-button").innerHTML = "Pause Game";
 
 		//restart game if innerHTML = "Restart Game"

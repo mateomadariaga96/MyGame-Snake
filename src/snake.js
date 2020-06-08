@@ -55,12 +55,6 @@ class Snake {
 		this.snakeArr.unshift(head);	
 	}
 
-	_checkIsCollision(element) {
-		const colX = this.snakeArr[0].x > (element.x + element.x.width);
-		const colY = this.snakeArr[0].y > (element.y + element.y.height);
-		return colX && colY;
-	}
-
 	_setListeners() {
 		document.addEventListener('keydown', event => {
 			const goingUp = this.dy === -20;
