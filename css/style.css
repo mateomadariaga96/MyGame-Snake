@@ -46,4 +46,8 @@ button {
 	padding: 15px 30px;
 	border-radius: 10px;
 	margin-bottom: 50px;
-  }
+}
+
+/*#stop-button #resume-button #newGame-button {
+	display:none;
+}*/

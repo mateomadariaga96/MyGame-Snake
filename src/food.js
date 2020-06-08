@@ -1,23 +1,29 @@
 class Food {
 	constructor(ctx) {
 	  this.ctx = ctx
-	  this.foodX = 0
-	  this.foodY = 0
+	  this.x = 0
+	  this.y = 0
+
+	  this.foodpic = new Image()
+	  this.foodpic.src = "./img/apple.png"
 	}
 
 	createFood() { 
 		function randomTen(min, max) { 
-			return Math.round((Math.random() * (max-min) + min) / 10) * 10;
+			return Math.round((Math.random() * (max-min) + min) / 20) * 20;
 		}
 
-		this.foodX = randomTen(0, 490);  
-		this.foodY = randomTen(0, 490);
+		this.x = randomTen(0, 500);  
+		this.y = randomTen(0, 500);
     }
 
 	draw() {
-		ctx.fillStyle = 'red';
-		ctx.strokestyle = 'darkred'; 
-		ctx.fillRect(this.foodX, this.foodY, 10, 10); 
-		ctx.strokeRect(this.foodX, this.foodY, 10, 10);
+		this.ctx.drawImage(
+			this.foodpic,
+			this.x,
+			this.y,
+			20,
+			20
+		)
     }  
 }
