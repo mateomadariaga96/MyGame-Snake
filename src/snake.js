@@ -13,6 +13,15 @@ class Snake {
 		this.dx = 20
 		this.dy = 0
 
+		this.headRight = new Image()
+		this.headRight.src = "./headRight.png"
+		this.headLeft = new Image()
+		this.headLeft.src = "./headLeft.png"
+		this.headUp = new Image()
+		this.headUp.src = "./img/headUp.png" 
+		this.headDown = new Image()
+		this.headDown.src = "./img/headDown.png"
+
 		this._setListeners()
 
 	}
@@ -20,20 +29,32 @@ class Snake {
 
 	draw() {
 
-		function drawSnakePart(snakePart) {
-			ctx.fillStyle = '#ffffff';
-		    ctx.strokestyle = '#000000';
+		function drawSnakeOrange(snakePart) {
+			ctx.fillStyle = '#ff914d';
+		    ctx.strokestyle = '#008037';
 			 
+			ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
+			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);
+		}
+		this.snakeArr.forEach(drawSnakeOrange)
+
+		/*function drawSnakeRed(snakePart) {
+			ctx.fillStyle = '#ff1616';
+			ctx.strokestyle = '#000000';
+				 
 			ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
 			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);
 		  
 		}
-			this.snakeArr.forEach(drawSnakePart)
+
+		if (this.snakeArr[i] % 2 === 0) {
+			this.snakeArr.forEach(drawSnakeOrange)
+		} else {
+			this.snakeArr.forEach(drawSnakeRed)
+		}*/
 	}
 
 	move () {
-		
-	    
 		this.snakeArr.forEach((element) => {
 			if (element.x > 500) {
 			element.x = 0
