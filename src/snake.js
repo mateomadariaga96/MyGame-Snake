@@ -8,24 +8,23 @@ class Snake {
 			{x:200, y:240},
 			{x:180, y:240},
 			{x:160, y:240}
-		]
+		];
 
-		this.dx = 20
-		this.dy = 0
+		this.dx = 20;
+		this.dy = 0;
 
 		this.headRight = new Image()
-		this.headRight.src = "./headRight.png"
+		this.headRight.src = "./headRight.png";
 		this.headLeft = new Image()
-		this.headLeft.src = "./headLeft.png"
+		this.headLeft.src = "./headLeft.png";
 		this.headUp = new Image()
-		this.headUp.src = "./img/headUp.png" 
+		this.headUp.src = "./img/headUp.png";
 		this.headDown = new Image()
-		this.headDown.src = "./img/headDown.png"
+		this.headDown.src = "./img/headDown.png";
 
-		this._setListeners()
+		this._setListeners();
 
 	}
-
 
 	draw() {
 
@@ -36,8 +35,10 @@ class Snake {
 			ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
 			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);
 		}
-		this.snakeArr.forEach(drawSnakeOrange)
 
+		this.snakeArr.forEach(drawSnakeOrange);
+
+		//Pintar un cuadrado de cada color
 		/*function drawSnakeRed(snakePart) {
 			ctx.fillStyle = '#ff1616';
 			ctx.strokestyle = '#000000';
@@ -52,29 +53,28 @@ class Snake {
 		} else {
 			this.snakeArr.forEach(drawSnakeRed)
 		}*/
-	}
+	};
 
 	move () {
 		this.snakeArr.forEach((element) => {
 			if (element.x > 480) {
-			element.x = 0
-			}
+			    element.x = 0
+			};
 			if (element.x < 0) {
 				element.x = 480
-			}
+			};
 			if (element.y > 480) {
 				element.y = 0
-			}
+			};
 			if (element.y < 0) {
 				element.y = 480
-			}
-				
-		})
+			};			
+		});
 
 		const head = {x: this.snakeArr[0].x + this.dx, y: this.snakeArr[0].y + this.dy};
 			
 		this.snakeArr.unshift(head);	
-	}
+	};
 
 	_setListeners() {
 		document.addEventListener('keydown', event => {
@@ -88,28 +88,28 @@ class Snake {
 					if(!goingDown) {
 					this.dy = -20;
 					this.dx = 0;	
-					}
+					};
 					break;
 				case DOWN:
 					if(!goingUp) {
 					this.dy = 20;
 					this.dx = 0 ;
-					}
+					};
 					break;
 				case LEFT:
 					if(!goingRight) {
 					this.dy = 0;
 					this.dx = -20 ;
-					}
+					};
 					break;
 				case RIGHT:
 					if(!goingLeft) {
 					this.dy = 0;
 					this.dx = 20;
 					break;
-					}
-            }
-        })
-	}
+					};
+            };
+        });
+	};
 	
 }

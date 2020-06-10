@@ -11,7 +11,12 @@ class Game {
 	  this.obs = new Obstacle(ctx);
 
 	  this.score = 0;
-	}
+
+	  this.eatSound = new Audio()
+	  this.eatSound.src = "./sounds/eat.wav";
+	  this.lostSound = new Audio()
+	  this.lostSound.src = "./sounds/endGame.wav";
+	};
 
 	start() {
 		this.fd.createFood();
@@ -19,16 +24,17 @@ class Game {
 		this.obs.createObstacle();
 		//if (document.getElementById("score-num").innerHTML <= 100){
 		this.intervalId =  setInterval(() => {
-			this._clear()
-			this._draw()
-			this._move()
-			this._checkFoodCollisions()
-			this._addFood()
-			//this._checkObsCollisions()
-			this._checkSuperFoodCollisions()
-			this._addSuperFood()
-			//this._addObstacle()
-			this._checkSnakeCollisions()
+			this._clear();
+			this._draw();
+			this._move();
+			this._checkFoodCollisions();
+			this._addFood();
+			this._checkSuperFoodCollisions();
+			this._addSuperFood();
+			//this._checkObsCollisions();
+			//this._addObstacle();
+			this._checkSnakeCollisions();
+			this._checkWallCollisions();
 		},  1000 / 10);
 	
 
@@ -45,7 +51,7 @@ class Game {
 			},  1000 / 20);
 		}*/
 		
-	}
+	};
 
 	pause() {
 		clearInterval(this.intervalId);
@@ -59,25 +65,26 @@ class Game {
 			this.pause();
 			document.getElementById('start-button').onclick = () => {
 				this.resume();
-			}
-		}
+			};
+		};
 		this.intervalId =  setInterval(() => {
-			this._clear()
-			this._draw()
-			this._move()
-			this._checkFoodCollisions()
-			this._addFood()
-			//this._checkObsCollisions()
-			//this._addObstacle()
-			this._checkSuperFoodCollisions()
-			this._addSuperFood()
-			this._checkSnakeCollisions()
+			this._clear();
+			this._draw();
+			this._move();
+			this._checkFoodCollisions();
+			this._addFood();
+			this._checkSuperFoodCollisions();
+			this._addSuperFood();
+			//this._checkObsCollisions();
+			//this._addObstacle();
+			this._checkSnakeCollisions();
+			this._checkWallCollisions();
 		},  1000 / 10);
-	}
+	};
 
 	_clear() {
 		this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
-	}
+	};
 
 	_draw() {
 		this.bg.draw();
@@ -85,18 +92,18 @@ class Game {
 	    this.fd.draw();
 		if (this.score >= 50 && this.score % 50 === 0) {
 			this.obs.draw();
-		}
+		};
 		if (this.score >=100 && this.score % 100 === 0) {
 			this.superfd.draw();
-		}	
-	}
+		};	
+	};
 
 	_move() {
 		this.snake.move();
 		if (this.score >=100 && this.score % 100 === 0) {
 		this.superfd.move();
-		}	
-	}
+		};	
+	};
 
 	_addFood() {
 		this.snake.snakeArr.forEach( (part) => {
@@ -104,7 +111,7 @@ class Game {
 				this.fd.createFood();
             };
         });	
-	}
+	};
 
 	_addSuperFood() {
 		this.snake.snakeArr.forEach( (part) => {
@@ -112,14 +119,14 @@ class Game {
 				this.superfd.createSuperFood();
             }; 
         });
-	}
+	};
 
 	/*_addObstacle() {
 		this.snake.snakeArr.forEach( (part) => {
 			if (this.obs.x === part.x && this.obs.y === part.y) {
 				this.obs.createObstacle();
-            } 
-        })	
+            } ;
+        });	
 	}*/
 
 	_checkFoodCollisions() {
@@ -128,10 +135,11 @@ class Game {
 		if (didEatFood) {    
 			this.fd.createFood();
 			this._updateScore();
+			this.eatSound.play();
 		} else {    
 		this.snake.snakeArr.pop();  
 	    };
-	}
+	};
 
 	_checkSuperFoodCollisions() {
 		const didEatSuperFood = this.snake.snakeArr[0].x === this.superfd.x &&
@@ -139,6 +147,7 @@ class Game {
 		if (didEatSuperFood) {    
 			this.superfd.createSuperFood();
 			this._updateScoreSpecial();
+			this.eatSound.play();
 		}
 		this.snake.snakeArr.forEach( (part) => {
 			if (this.superfd.x === part.x && this.superfd.y === part.y) {
@@ -149,7 +158,7 @@ class Game {
 
 	_checkObsCollisions() {
 		const didGetEaten = this.snake.snakeArr[0].x === this.obs.x &&
-		this.snake.snakeArr[0].y === this.obs.y
+		this.snake.snakeArr[0].y === this.obs.y;
 		if (didGetEaten) {    
 			this._gameOver();
 		} 
@@ -165,6 +174,23 @@ class Game {
 		}
 	}
 
+	_checkWallCollisions() {
+		if(this.score > 400) {
+		  if (this.snake.snakeArr[0].x > 480) {
+			this._gameOver();
+		  }
+		  if (this.snake.snakeArr[0].y > 480) {
+			this._gameOver();
+		  }
+		  if (this.snake.snakeArr[0].x <= 0) {
+			this._gameOver();
+		  }
+		  if (this.snake.snakeArr[0].y <= 0) {
+			this._gameOver();
+		  }
+	    }
+	}
+
 	_gameOver() {
 		clearInterval(this.intervalId);
 		const gameOver = new Image ();
@@ -175,6 +201,7 @@ class Game {
 		document.getElementById("start-button").style.display = "none";
 		document.getElementById("how-button").style.display = "flex";
 		document.getElementById("how-button").innerHTML = "Restart Game";
+		this.lostSound.play();
 	}
 
 	_updateScore() {   
