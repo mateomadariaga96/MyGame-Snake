@@ -29,10 +29,14 @@ class Game {
 			this._move();
 			this._checkFoodCollisions();
 			this._addFood();
+			if (this.score > 0 && this.score % 100 === 0) {
 			this._checkSuperFoodCollisions();
+			}
 			this._addSuperFood();
-			//this._checkObsCollisions();
-			//this._addObstacle();
+			if (this.score > 0 && this.score % 50 === 0) {
+			this._checkObsCollisions();
+			}
+			this._addObstacle();
 			this._checkSnakeCollisions();
 			this._checkWallCollisions();
 		},  1000 / 10);
@@ -93,7 +97,7 @@ class Game {
 		if (this.score >= 50 && this.score % 50 === 0) {
 			this.obs.draw();
 		};
-		if (this.score >=100 && this.score % 100 === 0) {
+		if (this.score >= 100 && this.score % 100 === 0) {
 			this.superfd.draw();
 		};	
 	};
@@ -121,13 +125,13 @@ class Game {
         });
 	};
 
-	/*_addObstacle() {
+	_addObstacle() {
 		this.snake.snakeArr.forEach( (part) => {
 			if (this.obs.x === part.x && this.obs.y === part.y) {
 				this.obs.createObstacle();
             } ;
         });	
-	}*/
+	}
 
 	_checkFoodCollisions() {
 		const didEatFood = this.snake.snakeArr[0].x === this.fd.x &&
@@ -142,8 +146,8 @@ class Game {
 	};
 
 	_checkSuperFoodCollisions() {
-		const didEatSuperFood = this.snake.snakeArr[0].x === this.superfd.x &&
-		this.snake.snakeArr[0].y === this.superfd.y
+		const didEatSuperFood = this.superfd && this.snake.snakeArr[0].x === this.superfd.x &&
+		this.snake.snakeArr[0].y === this.superfd.y;
 		if (didEatSuperFood) {    
 			this.superfd.createSuperFood();
 			this._updateScoreSpecial();
@@ -159,7 +163,7 @@ class Game {
 	_checkObsCollisions() {
 		const didGetEaten = this.snake.snakeArr[0].x === this.obs.x &&
 		this.snake.snakeArr[0].y === this.obs.y;
-		if (didGetEaten) {    
+		if (didGetEaten) {   
 			this._gameOver();
 		} 
 	}
