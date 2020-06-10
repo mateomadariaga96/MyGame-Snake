@@ -7,24 +7,44 @@ class Game {
 	  this.bg = new Background(ctx);
 	  this.snake = new Snake(ctx);
 	  this.fd = new Food(ctx);
+	  this.superfd = new superFood(ctx);
 	  this.obs = new Obstacle(ctx);
 
 	  this.score = 0;
 	}
 
 	start() {
-		this.fd.createFood()
-		this.obs.createObstacle()
+		this.fd.createFood();
+		this.superfd.createSuperFood();
+		this.obs.createObstacle();
+		//if (document.getElementById("score-num").innerHTML <= 100){
 		this.intervalId =  setInterval(() => {
 			this._clear()
 			this._draw()
 			this._move()
 			this._checkFoodCollisions()
-			//this._checkObsCollisions()
 			this._addFood()
+			//this._checkObsCollisions()
+			this._checkSuperFoodCollisions()
+			this._addSuperFood()
 			//this._addObstacle()
 			this._checkSnakeCollisions()
 		},  1000 / 10);
+	
+
+		/*if(this.score > 100){
+			this.intervalId =  setInterval(() => {
+				this._clear()
+				this._draw()
+				this._move()
+				this._checkFoodCollisions()
+				//this._checkObsCollisions()
+				this._addFood()
+				//this._addObstacle()
+				this._checkSnakeCollisions()
+			},  1000 / 20);
+		}*/
+		
 	}
 
 	pause() {
@@ -49,6 +69,8 @@ class Game {
 			this._addFood()
 			//this._checkObsCollisions()
 			//this._addObstacle()
+			this._checkSuperFoodCollisions()
+			this._addSuperFood()
 			this._checkSnakeCollisions()
 		},  1000 / 10);
 	}
@@ -60,22 +82,36 @@ class Game {
 	_draw() {
 		this.bg.draw();
 		this.snake.draw();
-		this.fd.draw();
+	    this.fd.draw();
 		if (this.score >= 50 && this.score % 50 === 0) {
 			this.obs.draw();
 		}
+		if (this.score >=100 && this.score % 100 === 0) {
+			this.superfd.draw();
+		}	
 	}
 
 	_move() {
-		this.snake.move();	
+		this.snake.move();
+		if (this.score >=100 && this.score % 100 === 0) {
+		this.superfd.move();
+		}	
 	}
 
 	_addFood() {
 		this.snake.snakeArr.forEach( (part) => {
 			if (this.fd.x === part.x && this.fd.y === part.y) {
 				this.fd.createFood();
-            } 
-        })	
+            };
+        });	
+	}
+
+	_addSuperFood() {
+		this.snake.snakeArr.forEach( (part) => {
+			if (this.superfd.x === part.x && this.superfd.y === part.y) {
+				this.superfd.createSuperFood();
+            }; 
+        });
 	}
 
 	/*_addObstacle() {
@@ -94,16 +130,30 @@ class Game {
 			this._updateScore();
 		} else {    
 		this.snake.snakeArr.pop();  
-	    }
+	    };
 	}
 
-	/*_checkObsCollisions() {
+	_checkSuperFoodCollisions() {
+		const didEatSuperFood = this.snake.snakeArr[0].x === this.superfd.x &&
+		this.snake.snakeArr[0].y === this.superfd.y
+		if (didEatSuperFood) {    
+			this.superfd.createSuperFood();
+			this._updateScoreSpecial();
+		}
+		this.snake.snakeArr.forEach( (part) => {
+			if (this.superfd.x === part.x && this.superfd.y === part.y) {
+				this.superfd.createSuperFood();
+            } 
+        });
+	}
+
+	_checkObsCollisions() {
 		const didGetEaten = this.snake.snakeArr[0].x === this.obs.x &&
 		this.snake.snakeArr[0].y === this.obs.y
 		if (didGetEaten) {    
 			this._gameOver();
 		} 
-	}*/
+	}
 
 	_checkSnakeCollisions() {
 		for (let i = 4; i < this.snake.snakeArr.length; i++) {
@@ -129,6 +179,11 @@ class Game {
 
 	_updateScore() {   
 		this.score += 10;    
+		document.getElementById("score-num").innerHTML = this.score;   
+	}
+	
+	_updateScoreSpecial() {   
+		this.score += 50;    
 		document.getElementById("score-num").innerHTML = this.score;   
     }
 }

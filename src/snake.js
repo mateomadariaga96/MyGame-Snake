@@ -56,17 +56,17 @@ class Snake {
 
 	move () {
 		this.snakeArr.forEach((element) => {
-			if (element.x > 500) {
+			if (element.x > 480) {
 			element.x = 0
 			}
 			if (element.x < 0) {
-				element.x = 500
+				element.x = 480
 			}
-			if (element.y > 500) {
+			if (element.y > 480) {
 				element.y = 0
 			}
 			if (element.y < 0) {
-				element.y = 500
+				element.y = 480
 			}
 				
 		})
