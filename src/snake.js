@@ -13,46 +13,121 @@ class Snake {
 		this.dx = 20;
 		this.dy = 0;
 
-		this.headRight = new Image()
-		this.headRight.src = "./headRight.png";
-		this.headLeft = new Image()
-		this.headLeft.src = "./headLeft.png";
-		this.headUp = new Image()
-		this.headUp.src = "./img/headUp.png";
-		this.headDown = new Image()
-		this.headDown.src = "./img/headDown.png";
 
 		this._setListeners();
-
 	}
 
 	draw() {
 
-		function drawSnakeOrange(snakePart) {
-			ctx.fillStyle = '#ff914d';
+		const up = this.dy === -20;
+		const down = this.dy === 20;  
+		const right = this.dx === 20;  
+		const left = this.dx === -20;
+
+		const arraySn = this.snakeArr
+		const ctx = this.ctx
+
+		function drawSnakePart(snakePart) {
+
+			
+		let headRight = new Image()
+		 headRight.src = "./img/head-right.png";
+		let headLeft = new Image()
+		 headLeft.src = "./img/head-left.png";
+		let headUp = new Image()
+		 headUp.src = "./img/head-up.png";
+		let headDown = new Image()
+		 headDown.src = "./img/head-down.png";
+
+		let tail = new Image()
+		 tail.src = "./img/tail.png";
+
+		let bodyHorizontal = new Image()
+		 bodyHorizontal.src = "./img/body-hor.png";
+		let bodyVertical = new Image()
+		 bodyVertical.src = "./img/body-ver.png";
+			/*ctx.fillStyle = '#ff914d';
 		    ctx.strokestyle = '#008037';
 			 
 			ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);
+			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);*/
+
+			const indexPart = arraySn.indexOf(snakePart)
+			const head = indexPart === 0;
+			const tails = arraySn.length - 1;
+			
+			switch(indexPart) {
+				case 0:
+					if (up) {
+						ctx.drawImage(
+							headUp,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						);
+					} else if (down) {
+						ctx.drawImage(
+							headDown,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						);
+					} else if (left) {
+						ctx.drawImage(
+							headLeft,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						);
+					} else if (right) {
+						ctx.drawImage(
+							headRight,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						)
+					}
+				break;
+
+				case tails:
+					if (up || down || left || right) {
+						ctx.drawImage(
+							tail,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						);
+					}
+				break;
+
+				default:
+					if (up || down) {
+						ctx.drawImage(
+							bodyVertical,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						);
+					} else if (right || left) {
+						ctx.drawImage(
+							bodyHorizontal,
+							snakePart.x,
+							snakePart.y,
+							20,
+							20
+						);
+					}
+				break;
+			};
 		}
 
-		this.snakeArr.forEach(drawSnakeOrange);
-
-		//Pintar un cuadrado de cada color
-		/*function drawSnakeRed(snakePart) {
-			ctx.fillStyle = '#ff1616';
-			ctx.strokestyle = '#000000';
-				 
-			ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);
-		  
-		}
-
-		if (this.snakeArr[i] % 2 === 0) {
-			this.snakeArr.forEach(drawSnakeOrange)
-		} else {
-			this.snakeArr.forEach(drawSnakeRed)
-		}*/
+		arraySn.forEach(drawSnakePart);
 	};
 
 	move () {

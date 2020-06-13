@@ -5,9 +5,12 @@ const scoreZero = "0";
 window.onload = () => {
 	//pre start image
 	const preStart = new Image ();
-	preStart.src = "./img/prestart.png"
+	preStart.src = "./img/prestart.png";
+	const preMusic = new Audio()
+	preMusic.src = "./sounds/prestart-music.mp3"
     preStart.onload = () => {
 		ctx.drawImage(preStart, 0, 0, 500, 500);
+		preMusic.play();
 	}
 
 	document.getElementById("score").style.display = "none";
@@ -29,6 +32,7 @@ window.onload = () => {
 			document.getElementById("how-button").style.display = "none";
 			document.getElementById("start-button").style.display = "flex";
 			document.getElementById("score-num").innerHTML = scoreZero;
+			document.getElementById("canvas").style.borderColor = "rgb(44, 42, 42)";
 
 		}
 	};
@@ -39,18 +43,8 @@ window.onload = () => {
 		document.getElementById("score").style.display = "flex";
 		document.getElementById("start-button").innerHTML = "Pause Game";
 		document.getElementById("how-button").style.display = "none";
-		//pauseResume();
+		preMusic.pause();
 	}
-
-	/*function pauseResume() {
-		const newGame = new Game(ctx)
-		document.getElementById('start-button').onclick = () => {
-			newGame.pause();
-			document.getElementById('start-button').onclick = () => {
-				newGame.resume();
-			}
-		}
-	}*/
 	
 	function startGame() {
 		const newGame = new Game(ctx)

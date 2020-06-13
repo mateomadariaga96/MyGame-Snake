@@ -8,7 +8,7 @@ class Obstacle {
       this.h = 20
 
 	  this.obstacle = new Image()
-	  this.obstacle.src = "./img/tiger.png"
+	  this.obstacle.src = "./img/poopic.png"
 	}
 
 	createObstacle() { 
