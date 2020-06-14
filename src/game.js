@@ -91,7 +91,7 @@ class Game {
 		};
 		if (this.score >= 100 && this.score % 100 === 0) {
 			this.superfd.draw();
-		};	
+		};
 	};
 
 	_move() {
@@ -177,11 +177,11 @@ class Game {
 		if (this.score >= 100) {
 			document.getElementById("canvas").style.borderColor = "red";
 		};
-		if(this.score > 100) {
-		  if (this.snake.snakeArr[0].x > 480) {
+		if(this.score >= 100) {
+		  if (this.snake.snakeArr[0].x >= 500) {
 			this._gameOver();
 		  };
-		  if (this.snake.snakeArr[0].y > 480) {
+		  if (this.snake.snakeArr[0].y >= 500) {
 			this._gameOver();
 		  };
 		  if (this.snake.snakeArr[0].x <= 0) {

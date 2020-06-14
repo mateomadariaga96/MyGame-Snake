@@ -35,7 +35,7 @@ window.onload = () => {
 			instruction.style.display = "none";
 			start.style.display = "flex";
 			document.getElementById("score-num").innerHTML = scoreZero;
-			canvas.style.borderColor = "rgb(44, 42, 42)";
+			canvas.style.borderColor = "rgb(3, 170, 58)";
 		};
 	};
 
