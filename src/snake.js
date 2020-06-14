@@ -37,7 +37,7 @@ class Snake {
 		 headDown.src = "./img/head-down.png";
 
 		let tail = new Image()
-		 tail.src = "./img/tail.png";
+		 tail.src = "./img/tail1.png";
 
 		let bodyHorizontal = new Image()
 		 bodyHorizontal.src = "./img/body-hor.png";
@@ -138,7 +138,10 @@ class Snake {
 			};			
 		});
 
-		const head = {x: this.snakeArr[0].x + this.dx, y: this.snakeArr[0].y + this.dy};
+		const head = {
+			x: this.snakeArr[0].x + this.dx, 
+			y: this.snakeArr[0].y + this.dy
+		};
 			
 		this.snakeArr.unshift(head);	
 	};
@@ -156,25 +159,25 @@ class Snake {
 					this.dy = -20;
 					this.dx = 0;	
 					};
-					break;
+				break;
 				case DOWN:
 					if(!goingUp) {
 					this.dy = 20;
 					this.dx = 0 ;
 					};
-					break;
+				break;
 				case LEFT:
 					if(!goingRight) {
 					this.dy = 0;
 					this.dx = -20 ;
 					};
-					break;
+				break;
 				case RIGHT:
 					if(!goingLeft) {
 					this.dy = 0;
 					this.dx = 20;
-					break;
-					};
+				break;
+				};
             };
         });
 	};
