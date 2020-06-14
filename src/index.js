@@ -1,6 +1,9 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const scoreZero = "0";
+const score = document.getElementById("score");
+const start = document.getElementById("start-button");
+const instruction = document.getElementById("how-button");
 
 window.onload = () => {
 	const preStart = new Image ()
@@ -12,36 +15,36 @@ window.onload = () => {
 		preMusic.play();
 	};
 
-	document.getElementById("score").style.display = "none";
+	score.style.display = "none";
 
 	//how to play button
 	const howToPlay = new Image ()
 	howToPlay.src = "./img/instructions1.png";
-	document.getElementById("how-button").onclick = () => {
-		if (document.getElementById("how-button").innerHTML === "How to play"){
+	instruction.onclick = () => {
+		if (instruction.innerHTML === "How to play"){
 		ctx.clearRect(0, 0, 500, 500);
 		ctx.drawImage(howToPlay, 0, 0, 500, 500);
-		document.getElementById("how-button").style.display = "none";
+		instruction.style.display = "none";
 		};
 
 		//Restart Button with innerHTML change
-		if (document.getElementById("how-button").innerHTML === "Restart Game"){
+		if (instruction.innerHTML === "Restart Game"){
 			startGame();
-			document.getElementById("score").style.display = "flex";
-		    document.getElementById("start-button").innerHTML = "Pause Game";
-			document.getElementById("how-button").style.display = "none";
-			document.getElementById("start-button").style.display = "flex";
+			score.style.display = "flex";
+		    start.innerHTML = "Pause Game";
+			instruction.style.display = "none";
+			start.style.display = "flex";
 			document.getElementById("score-num").innerHTML = scoreZero;
-			document.getElementById("canvas").style.borderColor = "rgb(44, 42, 42)";
+			canvas.style.borderColor = "rgb(44, 42, 42)";
 		};
 	};
 
 	//Start Game Button
-	document.getElementById("start-button").onclick = () => {
+	start.onclick = () => {
 		startGame();
-		document.getElementById("score").style.display = "flex";
-		document.getElementById("start-button").innerHTML = "Pause Game";
-		document.getElementById("how-button").style.display = "none";
+		score.style.display = "flex";
+		start.innerHTML = "Pause Game";
+		instruction.style.display = "none";
 		preMusic.pause();
 	};
 	
@@ -49,9 +52,9 @@ window.onload = () => {
 		const newGame = new Game(ctx)
 		newGame.start();
 		
-		document.getElementById("start-button").onclick = () => {
+		start.onclick = () => {
 			newGame.pause();
-			document.getElementById("start-button").onclick = () => {
+			start.onclick = () => {
 				newGame.resume();
 			};
 		};
