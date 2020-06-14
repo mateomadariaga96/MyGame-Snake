@@ -13,7 +13,6 @@ class Snake {
 		this.dx = 20;
 		this.dy = 0;
 
-
 		this._setListeners();
 	}
 
@@ -24,12 +23,10 @@ class Snake {
 		const right = this.dx === 20;  
 		const left = this.dx === -20;
 
-		const arraySn = this.snakeArr
-		const ctx = this.ctx
+		const arraySn = this.snakeArr;
+		const ctx = this.ctx;
 
-		function drawSnakePart(snakePart) {
-
-			
+		function drawSnakePart(snakePart) {	
 		let headRight = new Image()
 		 headRight.src = "./img/head-right.png";
 		let headLeft = new Image()
@@ -46,15 +43,10 @@ class Snake {
 		 bodyHorizontal.src = "./img/body-hor.png";
 		let bodyVertical = new Image()
 		 bodyVertical.src = "./img/body-ver.png";
-			/*ctx.fillStyle = '#ff914d';
-		    ctx.strokestyle = '#008037';
-			 
-			ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-			ctx.strokeRect(snakePart.x, snakePart.y, 20, 20);*/
 
-			const indexPart = arraySn.indexOf(snakePart)
-			const head = indexPart === 0;
-			const tails = arraySn.length - 1;
+		const indexPart = arraySn.indexOf(snakePart)
+		const head = indexPart === 0;
+		const tails = arraySn.length - 1;
 			
 			switch(indexPart) {
 				case 0:
@@ -89,8 +81,8 @@ class Snake {
 							snakePart.y,
 							20,
 							20
-						)
-					}
+						);
+					};
 				break;
 
 				case tails:
@@ -102,7 +94,7 @@ class Snake {
 							20,
 							20
 						);
-					}
+					};
 				break;
 
 				default:
@@ -122,10 +114,10 @@ class Snake {
 							20,
 							20
 						);
-					}
+					};
 				break;
 			};
-		}
+		};
 
 		arraySn.forEach(drawSnakePart);
 	};

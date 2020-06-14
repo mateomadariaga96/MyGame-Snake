@@ -1,15 +1,15 @@
 class Background {
 	constructor(ctx) {
 	  this.ctx = ctx;
-	  this.w = this.ctx.canvas.width
-	  this.h = this.ctx.canvas.height
-	  this.x = 0
-	  this.y = 0
+	  this.w = this.ctx.canvas.width;
+	  this.h = this.ctx.canvas.height;
+	  this.x = 0;
+	  this.y = 0;
   
   
 	  this.img = new Image()
-	  this.img.src = "./img/snake-board.jpg"
-	}
+	  this.img.src = "./img/snake-board.jpg";
+	};
   
 	draw() {
 	  this.ctx.drawImage(
@@ -19,5 +19,5 @@ class Background {
 		this.w,
 		this.h
 	  )
-	}
-}
+	};
+};

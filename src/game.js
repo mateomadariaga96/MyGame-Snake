@@ -42,22 +42,7 @@ class Game {
 			this._addObstacle();
 			this._checkSnakeCollisions();
 			this._checkWallCollisions();
-		},  1000 / 10);
-	
-
-		/*if(this.score > 100){
-			this.intervalId =  setInterval(() => {
-				this._clear()
-				this._draw()
-				this._move()
-				this._checkFoodCollisions()
-				//this._checkObsCollisions()
-				this._addFood()
-				//this._addObstacle()
-				this._checkSnakeCollisions()
-			},  1000 / 20);
-		}*/
-		
+		},  1000 / 10);	
 	};
 
 	pause() {
