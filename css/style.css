@@ -1,21 +1,24 @@
 html,
 body {
   height: 100%;
+  margin: 0;
 }
 
 .game-container {
 	background-image: url("../img/background.png");
 	width: 1000px;
-	height: 850px;
+	height: 700px;
 	display: flex;
     align-items: center;
 	justify-content: center;
 	margin: 0 auto;
 	flex-direction: column;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 canvas {
-    margin: 50px 50px 70px 50px;
+    margin: 20px 50px 30px 50px;
 	display: block;
 	box-shadow: 0px 0px 10px 15px rgba(173,122,109,1);
 	border: rgb(3, 170, 58) 8px solid;
@@ -45,5 +48,5 @@ button {
 	border: 5;
 	padding: 15px 30px;
 	border-radius: 10px;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
 }
