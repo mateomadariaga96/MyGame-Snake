@@ -2,7 +2,7 @@
 
 My first mini-game developed with Javascript, HTML5 & CSS from scratch.
 
-End of Module 1 preoject for Ironhack Fullstack Web Dev Bootcamp.
+End of Module 1 project for Ironhack Fullstack Web Dev Bootcamp.
 
 Edition: [WEBPT042020]
 
