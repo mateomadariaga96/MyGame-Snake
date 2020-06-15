@@ -30,7 +30,6 @@ class superFood {
 	};
 	
 	move() {
-    
 		this.x += this.vx;
 	
 		if (this.x > 480) {
