@@ -8,6 +8,15 @@ Edition: [WEBPT042020]
 
 Delivery date: 15/06/2020
 
+
+## How to open the app
+
+[Open the link with a web browser] (https://mateomadariaga96.github.io/MyGame-Snake/)
+
+The game has a "How to play" section with all the instructions explained in detail.
+
+You should try to make the snake as long as you can.
+
 ## Updated Technical Requirements
 ####  app must:
 
